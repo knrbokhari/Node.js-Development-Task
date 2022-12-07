@@ -17,7 +17,7 @@ const AddressSchema = mongoose.Schema(
             },
         },
         phone: {
-            type: Number,
+            type: String,
             require: [true, "is required"]
         },
         address1: {
