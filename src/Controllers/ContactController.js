@@ -1,10 +1,18 @@
 const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices } = require("../Services/ContactServices");
-const { NotFound } = require("../utils/error");
+const { NotFound, BadRequest } = require("../utils/error");
 
 // get all contacts
 exports.getAllContacts = async (req, res) => {
+    const  {pageNo, limit} = req.query;
     try {
-        const contacts = await findAllContactsServices()
+        if(pageNo <= 0) throw new BadRequest("invalid page number, should start with 1")
+
+        const skip = limit * (pageNo - 1)
+
+        const contacts = await findAllContactsServices(skip, limit)
+
+        if(contacts[0].pageInfo[0].contactLength < skip) throw new BadRequest("invalid page number, Contact not found")
+
         res.status(200).json({contacts, success: true,})
     } catch (e) {
         res.status(400).send(e.message);

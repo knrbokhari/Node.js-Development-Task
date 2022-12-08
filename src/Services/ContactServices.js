@@ -1,8 +1,17 @@
 const Contact = require("../Models/Contact")
 
 // find All Contacts Services
-exports.findAllContactsServices = async () => {
-    const contacts = await Contact.find();
+exports.findAllContactsServices = async (skip, limit) => {
+    const contacts = await Contact.aggregate([
+        {
+            $facet: {
+                data: [ { $skip: parseInt(skip) }, { $limit: parseInt(limit) } ],
+                pageInfo: [
+                    { $group: { _id: null, contactLength: { $sum: 1 } } },
+                  ],
+            },
+        },
+    ]);
     return contacts;
 };
 
