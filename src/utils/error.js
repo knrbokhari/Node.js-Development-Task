@@ -8,6 +8,7 @@ class GeneralError extends Error {
     return 400;
   }
 }
+
 class BadRequest extends GeneralError {
   constructor(message) {
     super(message);

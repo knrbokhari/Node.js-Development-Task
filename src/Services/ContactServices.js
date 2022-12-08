@@ -7,8 +7,8 @@ exports.findAllContactsServices = async () => {
 };
 
 // find Single Contact Services
-exports.findSingleContactServices = async (data) => {
-    const contact = await Contact.findOne({name: data});
+exports.findSingleContactByIdServices = async (id) => {
+    const contact = await Contact.findById(id);
     return contact;
 };
 

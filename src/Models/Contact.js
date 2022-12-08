@@ -4,7 +4,7 @@ const AddressSchema = mongoose.Schema(
     {
         name: {
             type: String,
-            require: [true, "is required"]
+            required: [true, "is required"]
         },
         email: {
             type: String,
@@ -18,11 +18,11 @@ const AddressSchema = mongoose.Schema(
         },
         phone: {
             type: String,
-            require: [true, "is required"]
+            required: [true, "is required"]
         },
         address1: {
             type: String,
-            require: [true, "is required"]
+            required: [true, "is required"]
         },
         address2: {
             type: String,
@@ -31,6 +31,6 @@ const AddressSchema = mongoose.Schema(
     {timestamps: true }
 )
 
-const Address = mongoose.model("Address", AddressSchema);
+const Address = mongoose.model("Contact", AddressSchema);
 
 module.exports = Address;

@@ -1,4 +1,6 @@
 const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact } = require("../Controllers/ContactController");
+const handleValidation = require("../Middleware/handleValidation");
+const validators = require("../Validation");
 
 const router = require("express").Router();
 
@@ -6,13 +8,13 @@ const router = require("express").Router();
 router.get('/', getAllContacts)
 
 // get single contact
-router.get('/:name', getSingleContact)
+router.get('/:id', getSingleContact)
 
 // 
 // router.get('/', "Fetch phase matching results")
 
 // create contact
-router.post('/', createNewContact)
+router.post('/', handleValidation(validators.contactValidation), createNewContact)
 
 // create contact
 // router.post('/', "bulk contacts")
@@ -24,7 +26,7 @@ router.patch('/:id', updateContact)
 router.delete('/:id', deleteContact)
 
 const configureContactRoutes = (app) => {
-    app.use("/address", router);
+    app.use("/api/contuct", router);
 };
   
 module.exports = configureContactRoutes;

@@ -1,11 +1,11 @@
-const { findAllContactsServices, findSingleContactServices, createContactServices, updateContactServices, deleteContactServices } = require("../Services/ContactServices");
+const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices } = require("../Services/ContactServices");
 const { NotFound } = require("../utils/error");
 
 // get all contacts
 exports.getAllContacts = async (req, res) => {
     try {
         const contacts = await findAllContactsServices()
-        res.status(200).json(contacts)
+        res.status(200).json({contacts, success: true,})
     } catch (e) {
         res.status(400).send(e.message);
     }
@@ -13,9 +13,9 @@ exports.getAllContacts = async (req, res) => {
 
 // get single contact
 exports.getSingleContact = async (req, res) => {
-    const { name } = req.params
+    const { id } = req.params
     try {
-        const contact = await findSingleContactServices(name)
+        const contact = await findSingleContactByIdServices(id)
 
         if(!contact) throw new NotFound("Contact not found");
 
@@ -46,7 +46,7 @@ exports.updateContact = async (req, res) => {
     const data = req.body
     try {
         const updateContact = await updateContactServices(id, data)
-        res.status(204).json({ success: true, updateContact, msg: "Contact update successfully"})
+        res.status(200).json({ success: true, updateContact, msg: "Contact update successfully"})
     } catch (e) {
         res.status(400).send(e.message);
     }
@@ -56,6 +56,10 @@ exports.updateContact = async (req, res) => {
 exports.deleteContact = async (req, res) => {
     const { id } = req.params 
     try {
+        const contact = await findSingleContactByIdServices(id)
+
+        if(!contact) throw new NotFound("Contact not found");
+
         const deleteContact = deleteContactServices(id)
         res.status(200).json({ success: true, msg: "Contact deleted successfully"});
     } catch (e) {

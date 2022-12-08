@@ -1,11 +1,11 @@
 const Joi = require("joi");
 
-const schema =Joi.object.keys({
+const schema = Joi.object().keys({
     name: Joi.string().min(3).required(),
-    email: Joi.string().email.required(),
-    phohe: Joi.string().min(10).pattern(/^[0-9]+$/).required(),
-    addresss1: Joi.string.min(5).required(),
-    addresss2: Joi.string.min(5),
+    email: Joi.string().email().required(),
+    phone: Joi.string().min(10).pattern(/^[0-9]+$/).required(),
+    address1: Joi.string().min(5).required(),
+    address2: Joi.string().min(5),
 })
 
 const contactValidation = (data) => {
