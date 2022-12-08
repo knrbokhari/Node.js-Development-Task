@@ -1,4 +1,4 @@
-const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact } = require("../Controllers/ContactController");
+const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact, getMatchingContact } = require("../Controllers/ContactController");
 const handleValidation = require("../Middleware/handleValidation");
 const verifyJWT = require("../Middleware/verifyJWT");
 const validators = require("../Validation");
@@ -12,7 +12,7 @@ router.get('/', verifyJWT, getAllContacts)
 router.get('/:id', verifyJWT, getSingleContact)
 
 // 
-// router.get('/', "Fetch phase matching results")
+router.get('/matching/:any', getMatchingContact)
 
 // create contact
 router.post('/', verifyJWT, handleValidation(validators.contactValidation), createNewContact)

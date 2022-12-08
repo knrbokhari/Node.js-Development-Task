@@ -1,4 +1,4 @@
-const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices } = require("../Services/ContactServices");
+const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices } = require("../Services/ContactServices");
 const { NotFound } = require("../utils/error");
 
 // get all contacts
@@ -20,6 +20,20 @@ exports.getSingleContact = async (req, res) => {
         if(!contact) throw new NotFound("Contact not found");
 
         res.status(200).json({contact, success: true})
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+}
+
+// get matching contact
+exports.getMatchingContact = async (req, res) => {
+    const { any } = req.params
+    try {
+        const contacts = await findContactsByAnyFieldServices(any)
+
+        if(!contacts.length) throw new NotFound("Contact not found");
+
+        res.status(200).json({contacts, success: true})
     } catch (e) {
         res.status(400).send(e.message);
     }

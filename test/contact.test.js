@@ -38,6 +38,20 @@ describe('GET /api/contuct/:id', () => {
     })
 })
 
+describe('GET /api/contuct/matching/:any', () => { 
+    test('responds with an array of contact', async () => { 
+        await request(app)
+            .get("/api/contuct/matching/naeem")
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200)
+            .then((res) => {
+                expect(res.body.success).toEqual(true);
+                expect(res.body.contacts.length).toBeGreaterThanOrEqual(0);
+            });
+    })
+})
+
 describe('POST /api/contuct', () => { 
     const newContact = {
         "name": "kazi naeem",

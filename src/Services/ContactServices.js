@@ -12,6 +12,12 @@ exports.findSingleContactByIdServices = async (id) => {
     return contact;
 };
 
+// find Contacts By Any Field Services
+exports.findContactsByAnyFieldServices = async (any) => {
+    const contacts = await Contact.find({$or:[{name: any}, {email: any}, {phone: any}, {address1: any}, {address2: any}]});
+    return contacts;
+};
+
 // create Contact Services
 exports.createContactServices = async (data) => {
     const contact = await Contact.create(data);

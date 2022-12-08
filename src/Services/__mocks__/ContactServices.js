@@ -13,6 +13,7 @@ const contacts = [
     },
 ]
 
+// find All Contacts
 exports.findAllContactsServices = () => {
     return contacts;
 };
@@ -21,6 +22,12 @@ exports.findAllContactsServices = () => {
 exports.findSingleContactByIdServices = async (id) => {
     const contact = await contacts.find((contact => contact._id === id));
     return contact;
+};
+
+// find Contacts By Any Field Services
+exports.findContactsByAnyFieldServices = async (any) => {
+    const result = await contacts.filter((i => i.name === any || i.email === any || i.phone  === any || i.address1 === any || i.address2 === any ))
+    return result;
 };
 
 // create Contact Services
