@@ -57,11 +57,10 @@ exports.deleteContact = async (req, res) => {
     const { id } = req.params 
     try {
         const contact = await findSingleContactByIdServices(id)
-
         if(!contact) throw new NotFound("Contact not found");
 
-        const deleteContact = deleteContactServices(id)
-        res.status(200).json({ success: true, msg: "Contact deleted successfully"});
+        await deleteContactServices(id)
+        res.status(202).json({ success: true, msg: "Contact deleted successfully"});
     } catch (e) {
         res.status(400).send(e.message);
     }
