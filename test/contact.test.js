@@ -4,16 +4,17 @@ const { app } = require('../src/app')
 jest.mock("../src/Services/ContactServices");
 jest.mock("../src/Middleware/verifyJWT");
 
-describe('GET /api/contuct', () => { 
+describe('GET /api/contuct?pageNo=1&limit=3', () => { 
     test('responds with an array of contact', async () => { 
         await request(app)
-            .get("/api/contuct")
+            .get("/api/contuct?pageNo=1&limit=3")
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200)
             .then((res) => {
+                console.log(res.body)
                 expect(res.body.success).toEqual(true);
-                expect(res.body.contacts.length).toBeGreaterThanOrEqual(0);
+                expect(res.body.contacts[0].contacts.length).toBeGreaterThanOrEqual(0);
             });
     })
 })

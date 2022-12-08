@@ -13,9 +13,16 @@ const contacts = [
     },
 ]
 
+const pageInfo = [
+    {
+        "_id": null,
+        "contactLength": contacts.length
+    }
+]
+
 // find All Contacts
-exports.findAllContactsServices = () => {
-    return contacts;
+exports.findAllContactsServices = (skip, limit) => {
+    return [{contacts, pageInfo}];
 };
 
 // find Single Contact Services

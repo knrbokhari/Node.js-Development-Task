@@ -11,7 +11,7 @@ exports.getAllContacts = async (req, res) => {
 
         const contacts = await findAllContactsServices(skip, limit)
 
-        if(contacts[0].pageInfo[0].contactLength < skip) throw new BadRequest("invalid page number, Contact not found")
+        if(contacts[0]?.pageInfo[0]?.contactLength < skip) throw new BadRequest("invalid page number, Contact not found")
 
         res.status(200).json({contacts, success: true,})
     } catch (e) {
