@@ -35,8 +35,11 @@ JWTKEY =
 ### Run the test 
     $ npm run test
 
+### API Documentation
+Check out the API documentation by visiting this [link](https://documenter.getpostman.com/view/21641752/2s8YzS1j4s).
+
 ### File Structure
-Node.js-Development-Task (root)
+Node.js-Development-Task/ (root)
 
 - src
   - Controllers
@@ -44,7 +47,7 @@ Node.js-Development-Task (root)
     - JwtControllers.js
   
   - Middleware
-    - __mocks__
+    - mocks
       - verifyJWT.js
     - handleError.js
     - handleValidation.js
@@ -58,7 +61,7 @@ Node.js-Development-Task (root)
     - index.js
     - JwtRoute.js
   - Services
-    - __mocks__
+    - mocks
       - ContactServices.js
     - ContactServices.js
 
