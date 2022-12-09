@@ -12,7 +12,6 @@ describe('GET /api/contuct?pageNo=1&limit=3', () => {
             .expect("Content-Type", /json/)
             .expect(200)
             .then((res) => {
-                console.log(res.body)
                 expect(res.body.success).toEqual(true);
                 expect(res.body.contacts[0].contacts.length).toBeGreaterThanOrEqual(0);
             });
@@ -81,6 +80,41 @@ describe('POST /api/contuct', () => {
     })
 })
 
+describe('POST /api/contuct/multiple', () => { 
+    const newContact = [
+        {
+            "name": "kazi naeem",
+            "email": "contact01@gmail.com",
+            "phone": "01701005000",
+            "address1": "Bangladesh",
+        },
+        {
+            "name": "naeem",
+            "email": "contact02@gmail.com",
+            "phone": "01709005000",
+            "address1": "Dhaka, Bangladesh",
+        }
+    ]
+
+    test('responds with a new array of contact', async () => { 
+        await request(app)
+            .post("/api/contuct/multiple")
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .send(newContact)
+            .expect(201)
+            .then((res) => {
+                expect(res.body.success).toEqual(true);
+                expect(res.body.msg).toEqual('New contacts added successfully');
+                const {_id, name, email, phone, address1} = res.body.newContact[0];
+                expect(_id.length).toEqual(24);
+                expect(name).toEqual(newContact[0].name);
+                expect(email).toEqual(newContact[0].email);
+                expect(phone).toEqual(newContact[0].phone);
+                expect(address1).toEqual(newContact[0].address1);
+            });
+    })
+})
 
 describe('PATCH /api/contuct/:id', () => { 
     const updateContact = {

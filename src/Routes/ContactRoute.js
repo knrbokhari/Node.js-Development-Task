@@ -1,4 +1,4 @@
-const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact, getMatchingContact } = require("../Controllers/ContactController");
+const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact, getMatchingContact, createMultipleContacts } = require("../Controllers/ContactController");
 const handleValidation = require("../Middleware/handleValidation");
 const verifyJWT = require("../Middleware/verifyJWT");
 const validators = require("../Validation");
@@ -17,8 +17,8 @@ router.get('/matching/:any', getMatchingContact)
 // create contact
 router.post('/', verifyJWT, handleValidation(validators.contactValidation), createNewContact)
 
-// create contact
-// router.post('/', "bulk contacts")
+// create bulk contact
+router.post('/multiple', createMultipleContacts)
 
 // Update contact
 router.patch('/:id', verifyJWT, updateContact)

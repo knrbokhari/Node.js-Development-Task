@@ -1,4 +1,4 @@
-const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices } = require("../Services/ContactServices");
+const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices, createBulkContactsServices } = require("../Services/ContactServices");
 const { NotFound, BadRequest } = require("../utils/error");
 
 // get all contacts
@@ -56,6 +56,21 @@ exports.createNewContact = async (req, res) => {
             success: true,
             newContact,
             msg: "New contact added successfully",
+          })
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+}
+
+// create bulk contact
+exports.createMultipleContacts = async (req, res) => {
+    const data = req.body
+    try {
+        const newContact = await createBulkContactsServices(data)
+        res.status(201).json({
+            success: true,
+            newContact,
+            msg: "New contacts added successfully",
           })
     } catch (e) {
         res.status(400).send(e.message);

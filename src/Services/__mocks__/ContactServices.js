@@ -44,6 +44,12 @@ exports.createContactServices = async (data) => {
     return contact;
 };
 
+// create bulk Contacts Services
+exports.createBulkContactsServices = async (data) => {
+    const contacts = data.map(i => new Contact(i))
+    return contacts;
+};
+
 // update Contact Services
 exports.updateContactServices = async (id, data) => {
     let contact = await contacts.find((contact => contact._id === id));

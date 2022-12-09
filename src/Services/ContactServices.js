@@ -27,6 +27,12 @@ exports.findContactsByAnyFieldServices = async (any) => {
     return contacts;
 };
 
+// create bulk Contacts Services
+exports.createBulkContactsServices = async (data) => {
+    const contacts = await Contact.insertMany(data);
+    return contacts;
+};
+
 // create Contact Services
 exports.createContactServices = async (data) => {
     const contact = await Contact.create(data);
