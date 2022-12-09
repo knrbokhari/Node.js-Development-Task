@@ -158,18 +158,3 @@ describe('DELETE /api/contuct', () => {
             });
     })
 })
-
-
-// describe('GET /api/contuct', () => { 
-//     test('responds with an array of contact', async () => { 
-//         await request(app)
-//             .get("/api/contuct")
-//             .set("Accept", "application/json")
-//             .expect("Content-Type", /json/)
-//             .expect(200)
-//             .then((res) => {
-//                 expect(res.body.success).toEqual(true);
-//                 expect(res.body.contacts.length).toBeGreaterThanOrEqual(0);
-//             });
-//     })
-// })

@@ -1,4 +1,3 @@
-const mongoose = require("mongoose")
 const Contact = require("../Models/Contact")
 
 // find All Contacts Services

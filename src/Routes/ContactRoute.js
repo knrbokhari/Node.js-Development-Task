@@ -12,16 +12,16 @@ router.get('/', verifyJWT, getAllContacts)
 router.get('/:id', verifyJWT, getSingleContactById)
 
 // get data by query maching field
-router.get('/query/field', getContactsByQueryMachingField)
+router.get('/query/field', verifyJWT, getContactsByQueryMachingField)
 
 // create contact
 router.post('/', verifyJWT, handleValidation(validators.contactValidation), createNewContact)
 
 // create bulk contact
-router.post('/multiple', createMultipleContacts)
+router.post('/multiple', verifyJWT, createMultipleContacts)
 
 // Update contact
-router.patch('/:id', verifyJWT, updateContact)
+router.patch('/:id', verifyJWT, handleValidation(validators.contactValidation), updateContact)
 
 // Delete contact
 router.delete('/:id', verifyJWT, deleteContact)

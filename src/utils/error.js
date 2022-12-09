@@ -31,5 +31,6 @@ class NotFound extends GeneralError {
   }
 }
 
+exports.GeneralError = GeneralError;
 exports.NotFound = NotFound;
 exports.BadRequest = BadRequest;
