@@ -36,7 +36,7 @@ JWTKEY =
     $ npm run test
 
 ### API Documentation
-Check out the API documentation by visiting this [link](https://documenter.getpostman.com/view/21641752/2s8YzS1j4s).
+Check out the API documentation by visiting this [Link](https://documenter.getpostman.com/view/21641752/2s8YzS1j4s).
 
 ### File Structure
 Node.js-Development-Task/ (root)
@@ -70,6 +70,7 @@ Node.js-Development-Task/ (root)
     - error.js
 
   - Validation
+      - ContactValidationWithId.js
       - ContactValidation.js
       - index.js
   - app.js

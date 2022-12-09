@@ -41,7 +41,7 @@ exports.createContactServices = async (data) => {
 
 // update Contact Services
 exports.updateContactServices = async (id, data) => {
-    const contact = await Contact.findByIdAndUpdate(id, data, {new: true});
+    const contact = await Contact.findByIdAndUpdate(id, data, { new: true });
     return contact;
 };
 

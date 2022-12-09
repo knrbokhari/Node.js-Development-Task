@@ -21,7 +21,7 @@ router.post('/', verifyJWT, handleValidation(validators.contactValidation), crea
 router.post('/multiple', verifyJWT, createMultipleContacts)
 
 // Update contact
-router.patch('/:id', verifyJWT, handleValidation(validators.contactValidation), updateContact)
+router.patch('/:id', verifyJWT, handleValidation(validators.contactValidationWithId), updateContact)
 
 // Delete contact
 router.delete('/:id', verifyJWT, deleteContact)
