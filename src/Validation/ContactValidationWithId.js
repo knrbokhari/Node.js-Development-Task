@@ -9,10 +9,10 @@ const schema = Joi.object().keys({
     address2: Joi.string().min(5),
 })
 
-const contactValidation = (data) => {
+const ContactValidationWithId = (data) => {
     const result = schema.validate(data);
     result.value = data;
     return result;
 };
 
-module.exports = contactValidation;
+module.exports = ContactValidationWithId;
