@@ -1,26 +1,26 @@
-const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices, createBulkContactsServices } = require("../Services/ContactServices");
+const { findAllContactsServices, findSingleContactByIdServices, createContactServices, updateContactServices, deleteContactServices, findContactsByAnyFieldServices, createBulkContactsServices, findContactsByQueryMachingFieldServices } = require("../Services/ContactServices");
 const { NotFound, BadRequest } = require("../utils/error");
 
 // get all contacts
 exports.getAllContacts = async (req, res) => {
-    const  {pageNo, limit} = req.query;
+    const  { pageNo, limit } = req.query;
     try {
         if(pageNo <= 0) throw new BadRequest("invalid page number, should start with 1")
 
         const skip = limit * (pageNo - 1)
 
-        const contacts = await findAllContactsServices(skip, limit)
-
-        if(contacts[0]?.pageInfo[0]?.contactLength < skip) throw new BadRequest("invalid page number, Contact not found")
-
-        res.status(200).json({contacts, success: true,})
+        const contacts = await findAllContactsServices(skip, limit, pageNo)
+        
+        if(contacts.paging.total < skip) throw new BadRequest("invalid page number, Contact not found")
+        
+        res.status(200).json({...contacts, success: true,})
     } catch (e) {
         res.status(400).send(e.message);
     }
 }
 
 // get single contact
-exports.getSingleContact = async (req, res) => {
+exports.getSingleContactById = async (req, res) => {
     const { id } = req.params
     try {
         const contact = await findSingleContactByIdServices(id)
@@ -33,11 +33,11 @@ exports.getSingleContact = async (req, res) => {
     }
 }
 
-// get matching contact
-exports.getMatchingContact = async (req, res) => {
-    const { any } = req.params
+// get contacts By Query Maching Field
+exports.getContactsByQueryMachingField = async (req, res) => {
+    const {  search } = req.query;
     try {
-        const contacts = await findContactsByAnyFieldServices(any)
+        const contacts = await findContactsByQueryMachingFieldServices( search )
 
         if(!contacts.length) throw new NotFound("Contact not found");
 

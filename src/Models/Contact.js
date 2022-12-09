@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const AddressSchema = mongoose.Schema(
+const ContactSchema = mongoose.Schema(
     {
         name: {
             type: String,
@@ -30,7 +30,9 @@ const AddressSchema = mongoose.Schema(
     },
     {timestamps: true }
 )
+// 
+ContactSchema.index( { name: "text", email: "text", phone: "text", address1: "text" } )
 
-const Address = mongoose.model("Contact", AddressSchema);
+const Address = mongoose.model("Contact", ContactSchema);
 
 module.exports = Address;

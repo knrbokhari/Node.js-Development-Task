@@ -1,18 +1,19 @@
+const mongoose = require("mongoose")
 const Contact = require("../Models/Contact")
 
 // find All Contacts Services
-exports.findAllContactsServices = async (skip, limit) => {
-    const contacts = await Contact.aggregate([
-        {
-            $facet: {
-                data: [ { $skip: parseInt(skip) }, { $limit: parseInt(limit) } ],
-                pageInfo: [
-                    { $group: { _id: null, contactLength: { $sum: 1 } } },
-                  ],
-            },
-        },
-    ]);
-    return contacts;
+exports.findAllContactsServices = async (skip, limit, pageNo) => {
+    const contacts = await Contact.find()
+    .limit(limit)
+    .skip(skip)
+    const count = await Contact.count()
+    return {
+        data: contacts, 
+        paging: {
+        total: count,
+        page:  parseInt(pageNo),
+        pages: Math.ceil(count / limit),
+    }};
 };
 
 // find Single Contact Services
@@ -21,9 +22,9 @@ exports.findSingleContactByIdServices = async (id) => {
     return contact;
 };
 
-// find Contacts By Any Field Services
-exports.findContactsByAnyFieldServices = async (any) => {
-    const contacts = await Contact.find({$or:[{name: any}, {email: any}, {phone: any}, {address1: any}, {address2: any}]});
+// find Contacts By Query Maching Field
+exports.findContactsByQueryMachingFieldServices = async ( search ) => {
+    const contacts = await Contact.find({ $text: { $search : search } });
     return contacts;
 };
 

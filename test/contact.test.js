@@ -13,7 +13,7 @@ describe('GET /api/contuct?pageNo=1&limit=3', () => {
             .expect(200)
             .then((res) => {
                 expect(res.body.success).toEqual(true);
-                expect(res.body.contacts[0].contacts.length).toBeGreaterThanOrEqual(0);
+                expect(res.body.data.length).toBeGreaterThanOrEqual(0);
             });
     })
 })
@@ -38,10 +38,10 @@ describe('GET /api/contuct/:id', () => {
     })
 })
 
-describe('GET /api/contuct/matching/:any', () => { 
+describe('GET api/contuct/query/field?search=naeem', () => { 
     test('responds with an array of contact', async () => { 
         await request(app)
-            .get("/api/contuct/matching/naeem")
+            .get("/api/contuct/query/field?search=naeem")
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200)

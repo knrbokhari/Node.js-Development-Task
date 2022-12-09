@@ -13,16 +13,15 @@ const contacts = [
     },
 ]
 
-const pageInfo = [
-    {
-        "_id": null,
-        "contactLength": contacts.length
-    }
-]
+const paging = {
+    total: contacts.length,
+    page: 1,
+    pages: 1,
+}
 
 // find All Contacts
-exports.findAllContactsServices = (skip, limit) => {
-    return [{contacts, pageInfo}];
+exports.findAllContactsServices = (skip, limit, pageNo) => {
+    return {data: contacts, paging};
 };
 
 // find Single Contact Services
@@ -31,9 +30,9 @@ exports.findSingleContactByIdServices = async (id) => {
     return contact;
 };
 
-// find Contacts By Any Field Services
-exports.findContactsByAnyFieldServices = async (any) => {
-    const result = await contacts.filter((i => i.name === any || i.email === any || i.phone  === any || i.address1 === any || i.address2 === any ))
+// find Contacts By Query Maching Field
+exports.findContactsByQueryMachingFieldServices = async ( search ) => {
+    const result = await contacts.filter(i => i.name.includes(search) || i.email.includes(search) || i.phone.includes(search) || i.address1.includes(search) || i.address2.includes(search));
     return result;
 };
 

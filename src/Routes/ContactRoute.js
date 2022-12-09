@@ -1,4 +1,4 @@
-const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContact, getMatchingContact, createMultipleContacts } = require("../Controllers/ContactController");
+const { deleteContact, updateContact, createNewContact, getAllContacts, getSingleContactById, getMatchingContact, createMultipleContacts, getContactsByQueryMachingField } = require("../Controllers/ContactController");
 const handleValidation = require("../Middleware/handleValidation");
 const verifyJWT = require("../Middleware/verifyJWT");
 const validators = require("../Validation");
@@ -9,10 +9,10 @@ const router = require("express").Router();
 router.get('/', verifyJWT, getAllContacts)
 
 // get single contact
-router.get('/:id', verifyJWT, getSingleContact)
+router.get('/:id', verifyJWT, getSingleContactById)
 
-// 
-router.get('/matching/:any', getMatchingContact)
+// get data by query maching field
+router.get('/query/field', getContactsByQueryMachingField)
 
 // create contact
 router.post('/', verifyJWT, handleValidation(validators.contactValidation), createNewContact)
