@@ -1,4 +1,4 @@
-## Simple Library REST Full API (Address Book)
+## Address Book REST Full API
 
 ## Built With
 * Node.js
@@ -72,8 +72,8 @@ Node.js-Development-Task/ (root)
     - error.js
 
   - Validation
-      - ContactValidationWithId.js
       - ContactValidation.js
+      - ContactValidationWithId.js
       - index.js
   - app.js
   - Connection.js
