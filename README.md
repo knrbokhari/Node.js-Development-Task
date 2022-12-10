@@ -21,8 +21,7 @@ For development, you will only need Node.js v16.15.1 installed in your environne
 
 
 ## Configure app
-Create `.env` file.
-Open `Node.js-Development-Task/.env` then You will need:
+Create a `.env` file. Open `Node.js-Development-Task/.env` then You will need to give your mongo_DB URL and JWTKEY:
 
 ```
 MONGO_DB = 
@@ -37,6 +36,9 @@ JWTKEY =
 
 ### API Documentation
 Check out the API documentation by visiting this [Link](https://documenter.getpostman.com/view/21641752/2s8YzS1j4s).
+
+### Live server link
+Check out the API by visiting this [Link](https://nodejs-development-task-production.up.railway.app/).
 
 ### File Structure
 Node.js-Development-Task/ (root)
