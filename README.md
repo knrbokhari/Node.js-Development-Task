@@ -37,8 +37,8 @@ JWTKEY =
 ### API Documentation
 Check out the API documentation by visiting this [Link](https://documenter.getpostman.com/view/21641752/2s8YzS1j4s).
 
-### Live server link
-Check out the API by visiting this [Link](https://nodejs-development-task-production.up.railway.app/).
+<!-- ### Live server link
+Check out the API by visiting this [Link](https://nodejs-development-task-production.up.railway.app/). -->
 
 ### File Structure
 Node.js-Development-Task/ (root)
